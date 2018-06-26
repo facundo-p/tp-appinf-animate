@@ -1,0 +1,76 @@
+
+
+
+<!--
+<h2>Coordenadas</h2>
+<ul *ngFor="let m of markers; let i = index">
+<li>
+<div>
+  <label>Latitud</label>
+  <input type="text" [value]="m.lat">
+  <label>Longitud</label>
+  <input type="text" [value]="m.lng">
+</div>
+</li>
+</ul>
+-->
+
+<div class="container">
+	<div *ngIf="eventosEncontrados;else no_result">
+		<div class="border">
+			<agm-map
+			  [latitude]="lat"
+			  [longitude]="lng"
+			  [zoom]="zoom"
+			  [disableDefaultUI]="false"
+			  [zoomControl]="true">
+
+			  <agm-marker 
+			      [latitude]="lat"
+			      [longitude]="lng">
+			    <agm-info-window>
+			      <strong>Mi ubicación</strong>
+			    </agm-info-window>
+			  </agm-marker>
+			  <agm-marker 
+			      *ngFor="let e of eventosEncontrados; let i = index"
+			      [latitude]="e.lat"
+			      [longitude]="e.lng">
+			      
+			    <agm-info-window>
+			    	<div>
+			      	<strong>{{e.titulo}}</strong> 
+			      </div>
+			      <span>{{e.fecha}} - De {{e.horaInicio}} a {{e.horaFin}} hs</span>
+			    </agm-info-window>
+			    
+			  </agm-marker>
+
+			</agm-map>
+		</div>
+		<hr class="mb-2">
+		<div class="py-2">
+			<div *ngFor="let e of eventosEncontrados; let i = index">
+
+		      <div class="card flex-md-row mb-4 box-shadow h-md-350">
+		        <div class="card-body d-flex col-md-10 flex-column align-items-start">
+		        	<div *ngFor="let tipo of e.tipoEvento">
+			          <label class="d-inline-block mb-1 text-primary">
+			          	{{tipo}}
+			          </label>
+		          	</div>
+		          <h3 class="mb-0">
+		            <span class="text-dark">{{ e.titulo }}</span>
+		          </h3>
+		          <div class="mb-1 text-muted">{{e.fecha}} - De {{e.horaInicio}} a {{e.horaFin}} hs</div>
+		          <div class="mb-1 text-muted">{{e.direccion}}</div>
+		          <p class="card-text mb-auto">{{e.descripcion}}</p>
+		          <a href="">Ver más</a>
+		        </div>
+		      </div>
+			</div>
+		</div>
+	</div>
+
+	<ng-template #no_result>No se encontraron resultados.</ng-template>
+</div>

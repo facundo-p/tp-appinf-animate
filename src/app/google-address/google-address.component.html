@@ -1,0 +1,20 @@
+<div class="container">
+      <div class="form-group">
+        <input placeholder="ubicación" autocorrect="off" autocapitalize="off" spellcheck="off" 
+        		type="text" class="form-control" name="search" required
+        		#search [formControl]="searchControl" (change)="log(searchControl)">       		
+        <div class="alert alert-danger" *ngIf="searchControl.touched && !searchControl.valid">
+        	<div *ngIf="searchControl.errors.required">
+        		Se debe ingresar la dirección del evento
+        	</div>
+        </div>
+      </div>
+      <div class="border">
+	      <agm-map [latitude]="ubicacion.lat" 
+	      		   [longitude]="ubicacion.lng" 
+	      		   [scrollwheel]="false" 
+	      		   [zoom]="zoom">
+	        <agm-marker [latitude]="ubicacion.lat" [longitude]="ubicacion.lng"></agm-marker>
+	      </agm-map>
+      </div>
+</div>

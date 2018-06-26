@@ -1,0 +1,53 @@
+
+<div class="container py-2">
+	<div class="box-shadow ">
+
+		<div class="row justify-content-center">
+			<div class="form-group">
+			  <label class="btn btn-success badge-pill mx-1" [(ngModel)]="tiposSeleccionados.medioAmbiente"
+			         btnCheckbox tabindex="0" role="button">{{ tipoEvento.medioAmbiente }}</label>
+			  <label class="btn btn-warning badge-pill mx-1" [(ngModel)]="tiposSeleccionados.comedores"
+			         btnCheckbox tabindex="0" role="button">{{ tipoEvento.comedores }}</label>
+			  <label class="btn btn-secondary badge-pill mx-1" [(ngModel)]="tiposSeleccionados.educacion"
+			         btnCheckbox tabindex="0" role="button">{{ tipoEvento.educacion }}</label>
+			  <label class="btn btn-danger badge-pill mx-1" [(ngModel)]="tiposSeleccionados.salud"
+			         btnCheckbox tabindex="0" role="button">{{ tipoEvento.salud }}</label>
+			  <label class="btn btn-primary badge-pill mx-1" [(ngModel)]="tiposSeleccionados.animales"
+			         btnCheckbox tabindex="0" role="button">{{ tipoEvento.animales }}</label>
+			</div>
+		</div>
+		<br/>
+		<div class="row justify-content-center">
+			  <div class="form-group col-sm-4 col-md-2">
+			    <button class="btn btn-success" (click)="drp.toggle()" [attr.aria-expanded]="drp.isOpen">Con fecha entre</button>
+			  </div>
+			  <div class="form-group col-sm-6 col-md-3">
+			    <input class="form-control" #drp="bsDaterangepicker" [minDate]="bsValue" bsDaterangepicker [(ngModel)]="bsRangeValue">
+			  </div>
+		</div>
+
+		<div class="row justify-content-center">
+			<div class="form-group">
+			  <label>A {{ busqueda.radio }} km de mi</label>
+			    <input type="range" min="1" max="40" class="col-md-12" [(ngModel)]="busqueda.radio" class="slider"> 
+			</div>
+		</div>
+
+	</div>
+
+<hr class="mb-3">
+
+	 <div class="row justify-content-center">
+		<button type="button" class="btn btn-primary mx-2" (click)="getEventos()">Buscar</button>
+		<button type="button" class="btn btn-primary mx-2" (click)="limpiarBusquda()">Limpiar</button>
+	 </div>
+
+<hr class="mb-3">
+<div>
+	<div class="row justify-content-center">
+		<div *ngIf="result;else no_result">
+			<app-event-list *ngIf="resultado" [eventosEncontrados]="resultado"></app-event-list>
+		</div>
+		<ng-template #no_result>No se encontraron resultados.</ng-template>
+	</div>
+</div>

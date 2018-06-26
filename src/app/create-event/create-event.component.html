@@ -1,0 +1,135 @@
+<div class="container">
+    <h2>Nuevo Evento</h2>
+    <br/>
+    <form>
+      <div class="form-group">
+        <label for="titulo">Título</label>
+        <input 	required minlength="3"
+        		[(ngModel)]="e.titulo" type="text" class="form-control" 
+        		id="titulo" name="titulo" #titulo="ngModel" placeholder="Título">
+        <div class="alert alert-danger" *ngIf="titulo.touched && !titulo.valid">
+        	<div *ngIf="titulo.errors.required">
+        		Se debe ingresar un título
+        	</div>
+        	<div *ngIf="titulo.errors.minlength">
+        		Mínimo de {{titulo.errors.minlength.requiredLength}} caracteres.
+        	</div>
+        </div>
+      </div>
+ 
+      <div class="form-group">
+        	<label class="py-1">De que trata el evento?</label>
+      	<div class="form-control">
+      		<div class="ml-1 row">
+		      <div class="custom-control custom-checkbox col-xs-12 col-md-2">
+				  <input type="checkbox" class="custom-control-input" 
+				  		 name="medioAmbiente" [(ngModel)]="medioAmbiente" id="medioAmbiente">
+				  <label class="custom-control-label" for="medioAmbiente">{{tipoEvento.medioAmbiente}}</label>
+			  </div>
+		      <div class="custom-control custom-checkbox col-xs-12 col-md-2">
+				  <input type="checkbox" class="custom-control-input" 
+				  		 name="comedores" [(ngModel)]="comedores" id="comedores">
+				  <label class="custom-control-label" for="comedores">{{tipoEvento.comedores}}</label>
+			  </div>
+		      <div class="custom-control custom-checkbox col-xs-12 col-md-2">
+				  <input type="checkbox" class="custom-control-input" 
+				  		 name="educacion" [(ngModel)]="educacion" id="educacion">
+				  <label class="custom-control-label" for="educacion">{{tipoEvento.educacion}}</label>
+			  </div>
+		      <div class="custom-control custom-checkbox col-xs-12 col-md-2">
+				  <input type="checkbox" class="custom-control-input" 
+				  		 name="salud" [(ngModel)]="salud" id="salud">
+				  <label class="custom-control-label" for="salud">{{tipoEvento.salud}}</label>
+			  </div>
+		      <div class="custom-control custom-checkbox col-xs-12 col-md-2">
+				  <input type="checkbox" class="custom-control-input" 
+				  		 name="animales" [(ngModel)]="animales" id="animales">
+				  <label class="custom-control-label" for="animales">{{tipoEvento.animales}}</label>
+			  </div>
+	      	</div>
+	    </div>
+      </div>
+
+      <div class="form-group pt-2">
+      	<div class="row">
+		    <div class="col-sm-12 col-md-4">
+		    <!--<div class="col-sm-4 col-md-4">
+		    	<button class="btn btn-success" (click)="dp.toggle()" [attr.aria-expanded]="dp.isOpen">Fecha</button>
+		    </div>-->
+			    <input type="text"
+			    	   id="fecha"
+			           class="form-control"
+			           #dp="bsDatepicker"
+			           bsDatepicker
+			           [bsValue]="bsValue"
+			           [minDate]="bsValue"
+			           placeholder="Fecha del evento">
+		    </div>
+		    <div class="input-group mb-1 col-md-3">
+			  <div class="input-group-prepend">
+			    <label class="input-group-text" for="horaDesde">Desde</label>
+			  </div>
+			  <select class="custom-select" id="horaDesde">
+			    <option *ngFor="let h of horas" 
+    				[value]="h" >
+  					{{h}}
+				</option>
+			  </select>
+			  <select class="custom-select" id="minutoDesde">
+			    <option *ngFor="let m of minutos" 
+    				[value]="m" >
+  					{{m}}
+				</option>
+			  </select>
+			</div>
+		    <div class="input-group mb-1 col-md-3">
+			  <div class="input-group-prepend">
+			    <label class="input-group-text" for="horaHasta">Hasta</label>
+			  </div>
+			  <select class="custom-select" id="horaHasta">
+			    <option *ngFor="let h of horas" 
+    				[value]="h" >
+  					{{h}}
+				</option>
+			  </select>
+			  <select class="custom-select" id="minutoHasta">
+			    <option *ngFor="let m of minutos" 
+    				[value]="m" >
+  					{{m}}
+				</option>
+			  </select>
+			</div>
+      	</div>
+      </div>
+
+      <div class="form-group pb-3">
+		<label for="radio"> Alcance de {{e.radio}} km</label>
+		<input [(ngModel)]="e.radio" type="range" min="1" max="40" class="form-control slider" id="radio" name="radio">
+      </div>
+
+      <google-address [(ubicacion)]="ubicacion"></google-address>
+ 
+      <div class="form-group pt-3">
+        <label for="descripcion">Describe tu evento</label>
+        <textarea required minlength="30" maxlength="100000" 
+        		[(ngModel)]="e.descripcion" type="text" class="form-control" placeholder="Descripción de mi evento..." 
+        		id="descripcion" name="descripcion" #descripcion="ngModel" rows="8">
+        </textarea>
+        <div class="alert alert-danger" *ngIf="descripcion.touched && !descripcion.valid">
+        	<div *ngIf="descripcion.errors.required">
+        		Se debe ingresar la descripción del evento
+        	</div>
+        	<div *ngIf="descripcion.errors.minlength">
+        		Mínimo de {{descripcion.errors.minlength.requiredLength}} caracteres.
+        	</div>
+        </div>
+      </div>
+ 
+<br/>
+
+      <button type="submit" class="btn btn-success">Submit</button>
+ 
+    </form>
+</div>
+
+<hr class="mb-3">
